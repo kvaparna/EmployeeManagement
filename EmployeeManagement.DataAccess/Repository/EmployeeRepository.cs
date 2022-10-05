@@ -7,18 +7,13 @@ using System.Linq;
 
 namespace EmployeeManagement.DataAccess.Repository
 {
-    /// <summary>
-    /// Connect To Database and Perforum CRUD operations
-    /// </summary>
+  
     public class EmployeeRepository : IEmployeeRepository
     {
 
         private SqlConnection _sqlConnection;
-       /* public EmployeeRepository(string connectionstring)
-        {
-            _sqlConnection = new SqlConnection(connectionstring);
-        }
-*/
+     
+
         public EmployeeRepository()
         {
             _sqlConnection = new SqlConnection("data source = (localdb)\\mssqllocaldb; database = TrainingDb;");
@@ -67,8 +62,8 @@ namespace EmployeeManagement.DataAccess.Repository
                     employee.Age = (int)sqlDataReader["Age"];
                     employee.Department_Name = (string)sqlDataReader["Department_Name"];
                     employee.Address = (string)sqlDataReader["Address"];
-                   
-                }
+                    employee.Employee_Id = (int)sqlDataReader["Employee_Id"];
+            }
             _sqlConnection.Close();
 
             return employee;
@@ -78,14 +73,15 @@ namespace EmployeeManagement.DataAccess.Repository
         {
               _sqlConnection.Open();
 
-                var sqlCommand = new SqlCommand(cmdText: "exec spInsertEmployee @Name,@Age,@Department_Id,@Employee_Id ,@Address", _sqlConnection);
+                var sqlCommand = new SqlCommand(cmdText: "exec spInsertEmployee @Name,@Age,@Department_Id,@Employee_Id,@Address", _sqlConnection);
                 sqlCommand.Parameters.AddWithValue("Name", employee.Name);
                 sqlCommand.Parameters.AddWithValue("Department_Id", employee.Department_Id);
                 sqlCommand.Parameters.AddWithValue("Employee_Id", employee.Employee_Id);
                 sqlCommand.Parameters.AddWithValue("Age", employee.Age);
                 sqlCommand.Parameters.AddWithValue("Address", employee.Address);
 
-                sqlCommand.ExecuteNonQuery();
+
+            sqlCommand.ExecuteNonQuery();
 
              _sqlConnection.Close();
 
@@ -95,16 +91,16 @@ namespace EmployeeManagement.DataAccess.Repository
         {
                _sqlConnection.Open();
 
-                var sqlCommand = new SqlCommand(cmdText: "EXEC spUpdateEmployee @Employee_Id ,@Name ,@Age ,@Department_Id ,@Address", _sqlConnection);
+                var sqlCommand = new SqlCommand(cmdText: "EXEC spUpdateEmployee @Employee_Id, @Name ,@Age ,@Department_Id ,@Address", _sqlConnection);
                 sqlCommand.Parameters.AddWithValue("Employee_Id", employee.Employee_Id);
                 sqlCommand.Parameters.AddWithValue("Name", employee.Name);
                 sqlCommand.Parameters.AddWithValue("Department_Id", employee.Department_Id);
                 sqlCommand.Parameters.AddWithValue("Age", employee.Age);
                 sqlCommand.Parameters.AddWithValue("Address", employee.Address);
+            sqlCommand.ExecuteNonQuery();
 
             _sqlConnection.Close();
 
-            sqlCommand.ExecuteNonQuery();
 
                 return true;
             

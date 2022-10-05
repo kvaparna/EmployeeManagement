@@ -65,6 +65,7 @@ namespace EmployeeManagement.Application.Services
                     Department_Name = employee.Department_Name,
                     Age = employee.Age,
                     Address=employee.Address,
+                    Employee_Id=employee.Employee_Id
                     
                 };
   
@@ -83,8 +84,7 @@ namespace EmployeeManagement.Application.Services
         private EmployeeData MapToEmployeeInsert(EmployeeDto insertEmployee)
         {
             var employeeDto = new EmployeeData()
-            {
-                Id = insertEmployee.Id,
+            {              
                 Name = insertEmployee.Name,
                 Department_Id = insertEmployee.Department_Id,
                 Employee_Id = insertEmployee.Employee_Id,

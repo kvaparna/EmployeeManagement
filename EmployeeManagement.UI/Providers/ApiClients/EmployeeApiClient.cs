@@ -4,6 +4,7 @@ using EmployeeManagement.UI.Providers.Contracts;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Text;
 
 namespace EmployeeManagement.UI.Providers.ApiClients
 {
@@ -31,18 +32,29 @@ namespace EmployeeManagement.UI.Providers.ApiClients
             var employee = JsonConvert.DeserializeObject<EmployeeDetailedViewModel>(response.Content.ReadAsStringAsync().Result);
             return employee;
         }
-        public bool InsertEmployee(EmployeeDetailedViewModel employee)
+
+        public bool InsertEmployee(EmployeeDetailedViewModel employeeDetailedViewModel)
         {
-            return true;
+            var stringContent = new StringContent(JsonConvert.SerializeObject(employeeDetailedViewModel), Encoding.UTF8, "application/json");
+            using (var response = _httpClient.PostAsync("https://localhost:5001/api/insertEmployees", stringContent).Result)
+            {
+                response.Content.ReadAsStringAsync();
+                return true;
+            }
         }
-        public bool UpdateEmployee(EmployeeDetailedViewModel employee)
+        public bool UpdateEmployee(EmployeeDetailedViewModel employeeDetailedViewModel)
         {
-            return true;
+            var stringContent = new StringContent(JsonConvert.SerializeObject(employeeDetailedViewModel), Encoding.UTF8, "application/json");
+            using (var response = _httpClient.PostAsync("https://localhost:5001/api/updateEmployees", stringContent).Result)
+            {
+                //response.Content.ReadAsStringAsync();
+                return true;
+            }
         }
         public bool DeleteEmployee(int employeeId)
         {
             var stringContent = new StringContent(JsonConvert.SerializeObject(employeeId));
-            using (var response = _httpClient.DeleteAsync("https://localhost:5001/api/employees/" + employeeId).Result)
+            using (var response = _httpClient.DeleteAsync("https://localhost:5001/api/deleteEmployees/" + employeeId).Result)
             {
                 return true;
             }

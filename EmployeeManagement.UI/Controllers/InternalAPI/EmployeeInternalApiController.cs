@@ -30,7 +30,7 @@ namespace EmployeeManagement.UI.Controllers.InternalAPI
                 return Ok(employee);
 
             }
-            catch (Exception exception)
+            catch (Exception)
             {
                 throw;
 
@@ -48,7 +48,7 @@ namespace EmployeeManagement.UI.Controllers.InternalAPI
 
                 return Ok(employee);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;
@@ -73,9 +73,9 @@ namespace EmployeeManagement.UI.Controllers.InternalAPI
         }
 
         [HttpPut]
-        [Route("updateEmployees/{employeeId}")]
+        [Route("updateEmployees")]
 
-        public IActionResult UpdateEmployee([FromRoute] int employeeId,[FromBody] EmployeeDetailedViewModel employees)
+        public IActionResult UpdateEmployee([FromBody] EmployeeDetailedViewModel employees)
         {
             try
             {

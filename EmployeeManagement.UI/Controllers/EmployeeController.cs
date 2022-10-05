@@ -23,8 +23,6 @@ namespace EmployeeManagement.UI.Controllers
             try
             {
                 var employees = _employeeApiClient.GetEmployees();
-
-                //Dummy Data Need to Replace with employees object
                 
                 return View(employees);
             }

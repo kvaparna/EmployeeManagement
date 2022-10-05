@@ -25,8 +25,7 @@ namespace EmployeeManagement.API.Controllers
         [Route("employees")]
         public IActionResult GetEmployees()
         {
-            /// get employees by calling GetEmployees() in IEmployeeService and store it in a variable and Map that variable to EmployeeDetailedViewModel. 
-            /// 
+            
             try
             {
 
@@ -63,7 +62,6 @@ namespace EmployeeManagement.API.Controllers
         {
             try
             {
-                /// get employee by calling GetEmployeeById() in IEmployeeService and store it in a variable and Map that variable to EmployeeDetailedViewModel. 
                 var employeeById = _employeeService.GetEmployeeById(employeeId);
                 if(employeeById==null)
                 {
@@ -88,15 +86,15 @@ namespace EmployeeManagement.API.Controllers
                 Department_Name = employeeById.Department_Name,
                 Age = employeeById.Age,
                 Address = employeeById.Address,
-               
+                Employee_Id = employeeById.Employee_Id
+
             };
 
             return employeeDto;
         }
 
         [HttpPost]
-        [Route("employees")]
-
+        [Route("insertEmployees")]
         public IActionResult InsertEmployee([FromBody] EmployeeDetailedViewModel employee)
         {
             try
@@ -134,12 +132,13 @@ namespace EmployeeManagement.API.Controllers
         
 
         [HttpPut]
-        [Route("employees/{employeeId}")]
+        [Route("updateEmployees")]
 
-        public IActionResult UpdateStudent([FromRoute] int employeeId, [FromBody] EmployeeDetailedViewModel employee)
+        public IActionResult UpdateStudent([FromBody] EmployeeDetailedViewModel employee)
         {
             try
-            {               
+            {
+              
                 var UpdateEmployee = _employeeService.UpdateEmployee(MapToEmployeeUpdate(employee));
                 if(UpdateEmployee)
                 {
@@ -161,6 +160,7 @@ namespace EmployeeManagement.API.Controllers
         {
             var employeeDto = new EmployeeDto()
             {
+                Id = employee.Id,
                 Employee_Id = employee.Employee_Id,
                 Name = employee.Name,
                 Department_Id = employee.Department_Id,
@@ -171,7 +171,7 @@ namespace EmployeeManagement.API.Controllers
         }
 
         [HttpDelete]
-        [Route("employees/{employeeId}")]
+        [Route("deleteEmployees/{employeeId}")]
 
         public IActionResult DeleteStudent([FromRoute] int employeeId)
         {
