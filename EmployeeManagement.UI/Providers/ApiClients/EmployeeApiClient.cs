@@ -45,7 +45,7 @@ namespace EmployeeManagement.UI.Providers.ApiClients
         public bool UpdateEmployee(EmployeeDetailedViewModel employeeDetailedViewModel)
         {
             var stringContent = new StringContent(JsonConvert.SerializeObject(employeeDetailedViewModel), Encoding.UTF8, "application/json");
-            using (var response = _httpClient.PostAsync("https://localhost:5001/api/updateEmployees", stringContent).Result)
+            using (var response = _httpClient.PutAsync("https://localhost:5001/api/updateEmployees", stringContent).Result)
             {
                 //response.Content.ReadAsStringAsync();
                 return true;
@@ -57,10 +57,8 @@ namespace EmployeeManagement.UI.Providers.ApiClients
             using (var response = _httpClient.DeleteAsync("https://localhost:5001/api/deleteEmployees/" + employeeId).Result)
             {
                 return true;
-            }
-            
+            }          
         }
-
 
     }
 

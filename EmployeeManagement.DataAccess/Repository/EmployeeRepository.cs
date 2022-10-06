@@ -105,13 +105,13 @@ namespace EmployeeManagement.DataAccess.Repository
                 return true;
             
         }
-        public bool DeleteEmployee(int Id)
+        public bool DeleteEmployee(int Employee_Id)
         {
 
             _sqlConnection.Open();
 
-                var sqlCommand = new SqlCommand(cmdText: "EXEC spDeleteEmployee @Id ", _sqlConnection);
-                sqlCommand.Parameters.AddWithValue("Id", Id);
+                var sqlCommand = new SqlCommand(cmdText: "EXEC spDeleteEmployee @Employee_Id ", _sqlConnection);
+                sqlCommand.Parameters.AddWithValue("Employee_Id", Employee_Id);
                 sqlCommand.ExecuteNonQuery();
 
            _sqlConnection.Close();

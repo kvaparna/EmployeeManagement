@@ -100,14 +100,8 @@ namespace EmployeeManagement.API.Controllers
             try
             {           
                 var insertEmployee = _employeeService.InsertEmployee(MapToEmployeeInsert(employee));
-                if(insertEmployee)
-                {
-                    return Ok(insertEmployee);
-                }
-                else 
-                {
-                    return StatusCode(StatusCodes.Status500InternalServerError);
-                }
+              
+                return Ok(insertEmployee);
             }
             catch (Exception ex)
             {
@@ -128,8 +122,7 @@ namespace EmployeeManagement.API.Controllers
             };
             return employeeDto;
         }
-
-        
+   
 
         [HttpPut]
         [Route("updateEmployees")]
@@ -138,17 +131,9 @@ namespace EmployeeManagement.API.Controllers
         {
             try
             {
-              
                 var UpdateEmployee = _employeeService.UpdateEmployee(MapToEmployeeUpdate(employee));
-                if(UpdateEmployee)
-                {
-                    return Ok(UpdateEmployee);
-                }
-                else
-                {
-                    return StatusCode(StatusCodes.Status500InternalServerError, "Failed to update employee details");
-                }
-                
+                return Ok(UpdateEmployee);
+
             }
             catch (Exception ex)
             {
@@ -160,7 +145,6 @@ namespace EmployeeManagement.API.Controllers
         {
             var employeeDto = new EmployeeDto()
             {
-                Id = employee.Id,
                 Employee_Id = employee.Employee_Id,
                 Name = employee.Name,
                 Department_Id = employee.Department_Id,
@@ -183,8 +167,7 @@ namespace EmployeeManagement.API.Controllers
                 var result = _employeeService.DeleteEmployee(employeeId);
                 return Ok(result);
             }
-           
-            
+
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);

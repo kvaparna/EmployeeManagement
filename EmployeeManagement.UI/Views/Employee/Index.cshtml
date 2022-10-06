@@ -23,9 +23,7 @@
                      <option value="2">HR</option>
                      <option value="3">MANAGER</option>
                      <option value="4">EXECUTIVE</option>
-                    
                     </select>
-
                     <br><label>Age:</label><br>
                     <input type="number" style="width:100%" id="age" name="age" required placeholder="Enter The Age" min="20" max="55" ><br>
                     <label>Address:</label><br>
@@ -51,15 +49,13 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                <form id="Updateform">
-                    <label>Id:</label><br>
-                    <input type="text" style="width:100%" id="idEdit" name="id" /><br>
+                <form id="Updateform">                
                     <label>Name:</label><br>
-                    <input type="text" style="width:100%" id="nameEdit" name="name" required pattern="[A-Za-z\s\.]{1,15}"><br>
+                    <input type="text" style="width:100%" id="nameEdit" name="name" required pattern="[A-Za-z\s\.]{1,30}"><br>
                     <label>Employee_Id:</label><br>
-                    <input type="number" style="width:100%" id="employee_IdEdit" name="employee_Id"  required min="1"><br>
+                    <input type="number" style="width:100%" id="employee_IdEdit" name="employee_Id" required readonly min="1"><br>
                     <label>Department_Name:</label><br>
-                    <select style="width:100%" id="department_IdEdit" name="department_Name">
+                    <select style="width:100%" id="department_IdEdit" name="department_Name" required>
                         <option value="1">CEO</option>
                         <option value="2">HR</option>
                         <option value="3">MANAGER</option>
@@ -68,7 +64,7 @@
                     <br><label>Age:</label><br>
                     <input type="number" style="width:100%" id="ageEdit" name="age" required min="20" max="55" ><br>
                     <label>Address:</label><br>
-                    <input type="text" style="width:100%" id="addressEdit" name="address" required pattern="[A-Za-z\s\.\,]{1-45}" maxlength="30"><br><br><br>
+                    <input type="text" style="width:100%" id="addressEdit" name="address" required pattern="[A-Za-z\s\.\,]{1,45}" maxlength="30"><br><br><br>
                     <input type="submit" value="Update">
                 </form>
 

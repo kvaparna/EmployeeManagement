@@ -31,34 +31,9 @@ function bindEvents() {
         });
     });
 
-    $(".employeeDelete").on("click", function (event) {
-        var employeeId = event.currentTarget.getAttribute("data-id");
-
-        var result = confirm("OK OR Cancel?");
-        if (result) {
-            alert("Successfully deleted the data");
-            $.ajax({
-                url: 'https://localhost:44383/api/internal/deleteEmployees/' + employeeId,
-                type: 'DELETE',
-                contentType: "application/json; charset=utf-8",
-                success: function (result) {
-                    location.reload();
-
-                    $("#EmployeeCard").html(newEmployeeCard);
-                    showEmployeeDetailCard();
-                },
-                error: function (error) {
-                    console.log(error);
-                }
-            });
-        }
-        else {
-            alert("Not deleted");
-        }
-    });
 
     $("#createform").submit(function (event) {
-        console.log("clicked");
+      
 
         var employeeDetailedViewModel = {};
 
@@ -68,7 +43,7 @@ function bindEvents() {
         employeeDetailedViewModel.Department_Name = $("#department_Name").val();
         employeeDetailedViewModel.Age = Number($("#age").val());
         employeeDetailedViewModel.Address = $("#address").val();
-        console.log("employeeDetailedViewModel", employeeDetailedViewModel)
+       
 
         var data = JSON.stringify(employeeDetailedViewModel);
 
@@ -99,7 +74,7 @@ function bindEvents() {
             type: 'GET',
             contentType: "application/json; charset=utf-8",
             success: function (result) {
-               
+
                 $("#nameEdit").val(result.name)
                 Number($("#employee_IdEdit").val(result.employee_Id))
                 Number($("#department_IdEdit").val(result.department_Id))
@@ -112,18 +87,17 @@ function bindEvents() {
             }
         });
 
-        $("#Updateform").on("click", function (event) {
+        $("#Updateform").submit(function (event) {
             console.log("clicked");
 
             var employeeDetailedViewModel = {};
 
-            employeeDetailedViewModel.Id = $("#idEdit").val();
             employeeDetailedViewModel.Name = $("#nameEdit").val();
             employeeDetailedViewModel.Employee_Id = Number($("#employee_IdEdit").val());
             employeeDetailedViewModel.Department_Id = Number($("#department_IdEdit").val());
             employeeDetailedViewModel.Age = Number($("#ageEdit").val());
             employeeDetailedViewModel.Address = $("#addressEdit").val();
-            console.log("employeeDetailedViewModel", employeeDetailedViewModel)
+           
 
             var data = JSON.stringify(employeeDetailedViewModel);
 
@@ -135,14 +109,39 @@ function bindEvents() {
                 data: data,
                 async: false,
                 success: function (result) {
-
-                    //location.reload();
+                    location.reload();
                 },
                 error: function (error) {
                     console.log(error);
                 }
             });
         });
+    });
+
+    $(".employeeDelete").on("click", function (event) {
+        var employeeId = event.currentTarget.getAttribute("data-id");
+
+        var result = confirm("OK OR Cancel?");
+        if (result) {
+            alert("Successfully deleted the data");
+            $.ajax({
+                url: 'https://localhost:44383/api/internal/deleteEmployees/' + employeeId,
+                type: 'DELETE',
+                contentType: "application/json; charset=utf-8",
+                success: function (result) {
+                    location.reload();
+
+                    $("#EmployeeCard").html(newEmployeeCard);
+                    showEmployeeDetailCard();
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+        else {
+            alert("Not deleted");
+        }
     });
 }
         
@@ -156,11 +155,10 @@ function showEmployeeDetailCard() {
             $("#EmployeeCard").show();
         }
 
-function showemployeeDeleteCard() {
-            $("#EmployeeCard").show();
-        }
-
 function showemployeeEditCard() {
             $("#EmployeeCard").show();
         }
 
+function showemployeeDeleteCard() {
+            $("#EmployeeCard").show();
+        }

@@ -115,9 +115,9 @@ namespace EmployeeManagement.Application.Services
             return employeeDto;
         }
 
-        public bool DeleteEmployee(int Id)
+        public bool DeleteEmployee(int Employee_Id)
         {
-                _employeeRepository.DeleteEmployee(Id);              
+                _employeeRepository.DeleteEmployee(Employee_Id);              
                 return true;
            
         }
